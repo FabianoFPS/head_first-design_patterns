@@ -6,8 +6,10 @@
   "author": "Fabiano F. P. Stoffel <ffpthai@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "test": "yarn test:unit ",
     "test:unit": "jest",
-    "test:functional": "jest --projects ./test --runInBand"
+    "test:functional": "jest --projects ./test --runInBand",
+    "run": "ts-node-dev --transpile-only"
   },
   "devDependencies": {
     "@types/jest": "^27.0.2",
