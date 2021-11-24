@@ -1,4 +1,4 @@
-import { Beverage } from './Beverage';
+import { Beverage, Size } from './Beverage';
 import { DarkRoast } from './DarkRoast';
 import { Expresso } from './Expresso';
 import { HouseBlend } from './HouseBlend';
@@ -56,8 +56,22 @@ describe('Coffes', () => {
       );
     });
 
-    it('deve retornar o preço', () => {
-      expect(beverage.cost()).toBe(1.79);
+    it('deve retornar o preço pequeno', () => {
+      console.log('antes', beverage.getSize());
+
+      beverage.setSize(Size.Small);
+      console.log('depois', beverage.getSize());
+      expect(beverage.cost()).toBe(1.49);
+    });
+
+    it('deve retornar o preço médio', () => {
+      beverage.setSize(Size.Mediun);
+      expect(beverage.cost()).toBe(1.54);
+    });
+
+    it('deve retornar o preço grande', () => {
+      beverage.setSize(Size.Big);
+      expect(beverage.cost()).toBe(1.59);
     });
   });
 });

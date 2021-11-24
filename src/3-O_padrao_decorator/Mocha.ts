@@ -1,4 +1,4 @@
-import { Beverage } from './Beverage';
+import { Beverage, Size } from './Beverage';
 import { CondimentDecorator } from './CondimentDecorator';
 
 export class Mocha extends CondimentDecorator {
@@ -12,5 +12,13 @@ export class Mocha extends CondimentDecorator {
 
   public cost() {
     return (this.beverage.cost() * 100 + 20) / 100;
+  }
+
+  getSize() {
+    return this.beverage.getSize();
+  }
+
+  setSize(size: Size) {
+    this.beverage.setSize(size);
   }
 }
