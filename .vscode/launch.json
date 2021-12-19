@@ -18,5 +18,19 @@
       "internalConsoleOptions": "neverOpen",
       "port": 9229
     },
+    {
+      "name": "Cap. #4",
+      "type": "node",
+      "request": "launch",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "${workspaceRoot}/node_modules/.bin/jest",
+        "--runInBand",
+        "src/4-O_padrao_Factory/Abstract_Factory/PizzaStore-AF.test.ts"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229
+    },
   ]
 }
