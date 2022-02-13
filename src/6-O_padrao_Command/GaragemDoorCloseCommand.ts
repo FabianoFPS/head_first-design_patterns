@@ -1,14 +1,14 @@
 import { Command } from './Command';
 import { GarageDoor } from './GarageDoor';
 
-export class GarageDoorOpenCommand implements Command {
+export class GarageDoorCloseCommand implements Command {
   constructor(private garageDoor: GarageDoor) {}
 
   execute(): void {
-    this.garageDoor.up();
+    this.garageDoor.down();
   }
 
   undo(): void {
-    this.garageDoor.down();
+    this.garageDoor.up();
   }
 }

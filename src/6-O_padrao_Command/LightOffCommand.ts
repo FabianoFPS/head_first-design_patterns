@@ -1,14 +1,14 @@
 import { Command } from './Command';
 import { Light } from './Light';
 
-export class LightOnCommand implements Command {
+export class LightOffCommnad implements Command {
   constructor(private light: Light) {}
 
-  public execute(): void {
-    this.light.on();
+  execute(): void {
+    this.light.off();
   }
 
   undo(): void {
-    this.light.off();
+    this.light.on();
   }
 }

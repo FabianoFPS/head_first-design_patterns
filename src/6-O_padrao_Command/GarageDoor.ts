@@ -1,21 +1,28 @@
 export class GarageDoor {
+  constructor(private area: string = '') {}
+
   up() {
-    console.log('Garage Door is Open');
+    this.print('Garage Door is Open');
   }
 
   down() {
-    console.log('Close Door');
+    this.print('Close Door');
   }
 
   stop() {
-    console.log('Stop Door');
+    this.print('Stop Door');
   }
 
   lightOn() {
-    console.log('Light Garage is on');
+    this.print('Light Garage is on');
   }
 
   lightOff() {
-    console.log('light Gara is off');
+    this.print('light Gara is off');
+  }
+
+  private print(action: string) {
+    const pre = this.area ? `${this.area} ` : '';
+    console.log(`${pre}${action}`);
   }
 }
