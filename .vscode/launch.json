@@ -32,5 +32,19 @@
       "internalConsoleOptions": "neverOpen",
       "port": 9229
     },
+    {
+      "name": "Cap. #6",
+      "type": "node",
+      "request": "launch",
+      "runtimeArgs": [
+        "--inspect-brk",
+        "${workspaceRoot}/node_modules/.bin/jest",
+        "--runInBand",
+        "src/6-O_padrao_Command/PatternCommand.test.ts"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "port": 9229
+    },
   ]
 }

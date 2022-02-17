@@ -9,6 +9,10 @@ import { Stereo } from './Stereo';
 import { StereoOnWithCDCommand } from './StereoOnWithCDCommand';
 import { StereoOffCommand } from './StereoOffCommand';
 import { GarageDoorCloseCommand } from './GaragemDoorCloseCommand';
+import { CelingFan } from './CeilingFan';
+import { CeilFanHighCommand } from './CeilingFanHighCommand';
+import { CeilFanOffCommand } from './CeilFabOffCommand';
+import { CeilFanMediunCommand } from './CeilFabMediunCommand';
 
 describe('Pattern Command', () => {
   const log = jest.spyOn(console, 'log');
@@ -48,7 +52,7 @@ describe('Pattern Command', () => {
     });
   });
 
-  describe('Remote Control', () => {
+  describe.only('Remote Control', () => {
     it('deve ligar a luz em "Living Room"', () => {
       const lightOffCommand = new LightOffCommnad(light);
 
@@ -96,6 +100,34 @@ describe('Pattern Command', () => {
       remoteControl.offButtonWasPushed(2);
 
       expect(log).toBeCalledWith('Front Close Door');
+    });
+
+    it('deve desfazer a ultima operação', () => {
+      const lightOffCommand = new LightOffCommnad(light);
+
+      remoteControl.setCommnand(0, lightOnCommand, lightOffCommand);
+      remoteControl.onButtonWasPushed(0);
+
+      remoteControl.undoButtonWasPushed();
+
+      expect(log).toBeCalledWith('Living Room Luz desligada');
+    });
+
+    it.only('deve retornar ao ultimo nível de potencia do ventilador', () => {
+      const mediunSpeed = 2;
+      const ceilingFan = new CelingFan('Living Room');
+      const ceilFanHighCommand = new CeilFanHighCommand(ceilingFan);
+      const ceilFanOffCommand = new CeilFanOffCommand(ceilingFan);
+      const ceilFanMediunCommand = new CeilFanMediunCommand(ceilingFan);
+
+      remoteControl.setCommnand(3, ceilFanHighCommand, ceilFanOffCommand);
+      remoteControl.setCommnand(4, ceilFanMediunCommand, ceilFanOffCommand);
+
+      remoteControl.onButtonWasPushed(4);
+      remoteControl.onButtonWasPushed(3);
+      remoteControl.undoButtonWasPushed();
+
+      expect(ceilingFan.getSpeed()).toBe(mediunSpeed);
     });
   });
 });
