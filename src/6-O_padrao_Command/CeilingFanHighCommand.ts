@@ -44,6 +44,6 @@ export class CeilFanHighCommand implements Command {
     //   [speedOptions.OFF]: this.ceilFan.off,
     // };
 
-    // // methods[this.preSpeed]();
+    // methods[this.preSpeed]();
   }
 }

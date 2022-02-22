@@ -13,6 +13,7 @@ import { CelingFan } from './CeilingFan';
 import { CeilFanHighCommand } from './CeilingFanHighCommand';
 import { CeilFanOffCommand } from './CeilFabOffCommand';
 import { CeilFanMediunCommand } from './CeilFabMediunCommand';
+import { MacroCommand } from './MacroCommand';
 
 describe('Pattern Command', () => {
   const log = jest.spyOn(console, 'log');
@@ -113,7 +114,7 @@ describe('Pattern Command', () => {
       expect(log).toBeCalledWith('Living Room Luz desligada');
     });
 
-    it.only('deve retornar ao ultimo nível de potencia do ventilador', () => {
+    it('deve retornar ao ultimo nível de potencia do ventilador', () => {
       const mediunSpeed = 2;
       const ceilingFan = new CelingFan('Living Room');
       const ceilFanHighCommand = new CeilFanHighCommand(ceilingFan);
@@ -128,6 +129,35 @@ describe('Pattern Command', () => {
       remoteControl.undoButtonWasPushed();
 
       expect(ceilingFan.getSpeed()).toBe(mediunSpeed);
+    });
+
+    it.only('deve executar o macro', () => {
+      const lightOffCommand = new LightOffCommnad(light);
+
+      const ceilingFan = new CelingFan('Living Room');
+      const ceilFanHighCommand = new CeilFanHighCommand(ceilingFan);
+
+      const garageDoor = new GarageDoor('Front');
+      const garagemDoorCloseCommand = new GarageDoorCloseCommand(garageDoor);
+
+      const stereo = new Stereo();
+      const stereoOnWithCDCommand = new StereoOnWithCDCommand(stereo);
+
+      const commands = [
+        lightOffCommand,
+        ceilFanHighCommand,
+        garagemDoorCloseCommand,
+        stereoOnWithCDCommand,
+      ];
+      const macro = new MacroCommand(commands);
+      macro.execute();
+
+      expect(log).toBeCalledWith('Living Room Luz desligada');
+      expect(ceilingFan.getSpeed()).toBe(3);
+      expect(log).toBeCalledWith('Front Close Door');
+      expect(log).toBeCalledWith('Stereo is on');
+      expect(log).toBeCalledWith('Stereo is set for Nirvana CD');
+      expect(log).toBeCalledWith('Stereo is set volume to 11');
     });
   });
 });
